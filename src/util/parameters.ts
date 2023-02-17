@@ -10,10 +10,7 @@ export enum ColorScheme { Light, Dark }
  * @param colorScheme The mapkit-react color scheme value
  * @returns The MapKit JS color scheme value
  */
-export function toMapKitColorScheme(colorScheme: ColorScheme | undefined): string {
-  if (!colorScheme) {
-    throw new RangeError('Invalid color scheme');
-  }
+export function toMapKitColorScheme(colorScheme: ColorScheme): string {
   switch (colorScheme) {
     case ColorScheme.Dark:
       return mapkit.Map.ColorSchemes.Dark;
@@ -136,7 +133,7 @@ export enum LoadPriority {
 /**
  * Converts a mapkit-react load priority to a MapKit JS load priority.
  * Must be called after MapKit JS is loaded.
- * @param mapPriority The mapkit-react load priority
+ * @param loadPriority The mapkit-react load priority
  * @returns The MapKit JS load priority
  */
 export function toMapKitLoadPriority(loadPriority: LoadPriority): string | null {
@@ -185,10 +182,7 @@ export enum FeatureVisibility {
  * @param featureVisibility The mapkit-react visibility
  * @returns The MapKit JS visibility
  */
-export function toMapKitFeatureVisibility(featureVisibility: FeatureVisibility | undefined): string {
-  if (!featureVisibility) {
-    throw new RangeError('Invalid feature visibility');
-  }
+export function toMapKitFeatureVisibility(featureVisibility: FeatureVisibility): string {
   switch (featureVisibility) {
     case FeatureVisibility.Adaptive:
       return mapkit.FeatureVisibility.Adaptive;
