@@ -133,7 +133,6 @@ export default interface MapProps {
      */
     initialRegion?: CoordinateRegion;
     region?: CoordinateRegion;
-    center?: CoordinateRegion;
     /**
      * A constraint of the location of the center of the map.
      * @see {@link https://developer.apple.com/documentation/mapkitjs/map/3257748-cameraboundary}

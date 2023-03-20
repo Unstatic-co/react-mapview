@@ -40,7 +40,6 @@ const Map = React.forwardRef<mapkit.Map | null, React.PropsWithChildren<MapProps
   minCameraDistance = 0,
   maxCameraDistance = Infinity,
   region = undefined,
-  center = undefined,
 
   onSingleTap = undefined,
   onDoubleTap = undefined,
@@ -125,21 +124,13 @@ const Map = React.forwardRef<mapkit.Map | null, React.PropsWithChildren<MapProps
     map.cameraBoundary = cameraBoundary ? toMapKitCoordinateRegion(cameraBoundary) : null;
   }, [map, cameraBoundary]);
 
-  // Camera boundary
+  // Region
   useEffect(() => {
     if (!map) return;
     console.log("region===>", region);
     // @ts-ignore
     map.region = region ? toMapKitCoordinateRegion(region) : null;
   }, [map, region]);
-
-  // Camera boundary
-  useEffect(() => {
-    if (!map) return;
-    console.log("region===>", region);
-    // @ts-ignore
-    map.center = center ? toMapKitCoordinateRegion(center) : null;
-  }, [map, center]);
 
   // Camera zoom range
   useEffect(() => {
