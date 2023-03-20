@@ -228,6 +228,18 @@ export interface CoordinateRegion {
   longitudeDelta: number;
 }
 
+export interface Coordinate {
+  /**
+   * The latitude of the center point in degrees.
+   */
+  centerLatitude: number;
+
+  /**
+   * The longitude of the center point in degrees.
+   */
+  centerLongitude: number;
+}
+
 /**
  * Converts a mapkit-react coordinate region to a MapKit JS coordinate region.
  * Must be called after MapKit JS is loaded.
