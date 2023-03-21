@@ -130,9 +130,7 @@ const Map = React.forwardRef<mapkit.Map | null, React.PropsWithChildren<MapProps
     // @ts-ignore
     if(region) {
       console.log('region====>', region);
-      
       const coordinateRegion = toMapKitCoordinateRegion(region)
-      console.log('coordinateRegion===>', coordinateRegion);
       map.setRegionAnimated(coordinateRegion, false)
     }
   }, [map, region]);
@@ -143,10 +141,7 @@ useEffect(() => {
   // @ts-ignore
   if(center) {
     console.log('center====>', center);
-
     const coordinateCenter = new mapkit.Coordinate(center.centerLatitude, center.centerLongitude);
-    console.log('coordinateCenter===>', coordinateCenter);
-    
     map.setCenterAnimated(coordinateCenter, false)
   }
 }, [map, center]);
