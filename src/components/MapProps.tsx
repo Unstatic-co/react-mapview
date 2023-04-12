@@ -1,5 +1,5 @@
 import {
-  ColorScheme, MapType, Distances, LoadPriority, CoordinateRegion,
+  ColorScheme, MapType, Distances, LoadPriority, CoordinateRegion, Coordinate,
 } from '../util/parameters';
 
 /**
@@ -151,6 +151,9 @@ export default interface MapProps {
    */
   initialRegion?: CoordinateRegion;
 
+  region?: CoordinateRegion;
+
+  center?: Coordinate;
   /**
    * A constraint of the location of the center of the map.
    * @see {@link https://developer.apple.com/documentation/mapkitjs/map/3257748-cameraboundary}
