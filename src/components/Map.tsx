@@ -150,7 +150,13 @@ useEffect(() => {
   useEffect(() => {
     if (!map) return;
     // @ts-ignore
-    map.cameraZoomRange = new mapkit.CameraZoomRange(minCameraDistance, maxCameraDistance);
+    // Try/catch to fix error: Uncaught TypeError: [MapKit] The `scaleFactor` parameter passed to `MapRect.scale()` is not a number.
+    // (https://github.com/Unstatic-co/appformula/issues/2433)
+    try {
+      map.cameraZoomRange = new mapkit.CameraZoomRange(minCameraDistance, maxCameraDistance);
+    } catch (error) {
+        // 
+    }
   }, [map, minCameraDistance, maxCameraDistance]);
 
   // Events
