@@ -1,6 +1,6 @@
 {
   "name": "react-mapview",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React wrapper for Apple's mapkit.js.",
   "author": "VTD",
   "homepage": "https://github.com/Unstatic-co/react-mapview",
