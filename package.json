@@ -1,15 +1,15 @@
 {
-  "name": "react-mapkit-wrapper",
+  "name": "react-mapview",
   "version": "1.0.2",
   "description": "React wrapper for Apple's mapkit.js.",
   "author": "VTD",
-  "homepage": "https://github.com/dattv-unstatic/react-mapkit-wrapper",
+  "homepage": "https://github.com/Unstatic-co/react-mapview",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dattv-unstatic/react-mapkit-wrapper"
+    "url": "https://github.com/Unstatic-co/react-mapview"
   },
   "bugs": {
-    "url": "https://github.com/dattv-unstatic/react-mapkit-wrapper/issues"
+    "url": "https://github.com/Unstatic-co/react-mapview/issues"
   },
   "keywords": [
     "react-component",
