@@ -2,7 +2,10 @@
  * Color schemes of the map.
  * @see {@link https://developer.apple.com/documentation/mapkitjs/map/colorschemes}
  */
-export enum ColorScheme { Light, Dark }
+export enum ColorScheme {
+  Light,
+  Dark,
+}
 
 /**
  * Converts a mapkit-react color scheme value to a MapKit JS color scheme value.
@@ -17,7 +20,7 @@ export function toMapKitColorScheme(colorScheme: ColorScheme): string {
     case ColorScheme.Light:
       return mapkit.Map.ColorSchemes.Light;
     default:
-      throw new RangeError('Invalid color scheme');
+      throw new RangeError("Invalid color scheme");
   }
 }
 
@@ -25,32 +28,7 @@ export function toMapKitColorScheme(colorScheme: ColorScheme): string {
  * Types of map to display.
  * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes}
  */
-export enum MapType {
-  /**
-   * A street map that shows the position of all roads and some road names.
-   * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/standard}
-   */
-  Standard,
-
-  /**
-   * A street map where your data is emphasized over the underlying map details.
-   * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/mutedstandard}
-   */
-  MutedStandard,
-
-  /**
-   * A satellite image of the area with road and road name information
-   * layered on top.
-   * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/hybrid}
-   */
-  Hybrid,
-
-  /**
-   * A satellite image of the area.
-   * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/satellite}
-   */
-  Satellite,
-}
+export type MapType = "standard" | "satellite" | "hybrid" | "mutedStandard";
 
 /**
  * Converts a mapkit-react map type value to a MapKit JS map type value.
@@ -60,16 +38,16 @@ export enum MapType {
  */
 export function toMapKitMapType(mapType: MapType): string {
   switch (mapType) {
-    case MapType.Standard:
+    case "standard":
       return mapkit.Map.MapTypes.Standard;
-    case MapType.MutedStandard:
+    case "mutedStandard":
       return mapkit.Map.MapTypes.MutedStandard;
-    case MapType.Hybrid:
+    case "hybrid":
       return mapkit.Map.MapTypes.Hybrid;
-    case MapType.Satellite:
+    case "satellite":
       return mapkit.Map.MapTypes.Satellite;
     default:
-      throw new RangeError('Invalid map type');
+      return mapkit.Map.MapTypes.Standard;
   }
 }
 
@@ -101,7 +79,7 @@ export function toMapKitDistances(distances: Distances): string {
     case Distances.Imperial:
       return mapkit.Map.Distances.Imperial;
     default:
-      throw new RangeError('Invalid distances value');
+      throw new RangeError("Invalid distances value");
   }
 }
 
@@ -136,7 +114,9 @@ export enum LoadPriority {
  * @param loadPriority The mapkit-react load priority
  * @returns The MapKit JS load priority
  */
-export function toMapKitLoadPriority(loadPriority: LoadPriority): string | null {
+export function toMapKitLoadPriority(
+  loadPriority: LoadPriority
+): string | null {
   switch (loadPriority) {
     case LoadPriority.LandCover:
       // @ts-ignore
@@ -148,7 +128,7 @@ export function toMapKitLoadPriority(loadPriority: LoadPriority): string | null 
       // @ts-ignore
       return mapkit.Map.LoadPriorities.None;
     default:
-      throw new RangeError('Invalid load priority');
+      throw new RangeError("Invalid load priority");
   }
 }
 
@@ -182,7 +162,9 @@ export enum FeatureVisibility {
  * @param featureVisibility The mapkit-react visibility
  * @returns The MapKit JS visibility
  */
-export function toMapKitFeatureVisibility(featureVisibility: FeatureVisibility): string {
+export function toMapKitFeatureVisibility(
+  featureVisibility: FeatureVisibility
+): string {
   switch (featureVisibility) {
     case FeatureVisibility.Adaptive:
       return mapkit.FeatureVisibility.Adaptive;
@@ -191,7 +173,7 @@ export function toMapKitFeatureVisibility(featureVisibility: FeatureVisibility):
     case FeatureVisibility.Hidden:
       return mapkit.FeatureVisibility.Hidden;
     default:
-      throw new RangeError('Invalid feature visibility');
+      throw new RangeError("Invalid feature visibility");
   }
 }
 
@@ -246,9 +228,11 @@ export interface Coordinate {
  * @param region The mapkit-react coordinate region
  * @returns The MapKit JS coordinate region
  */
-export function toMapKitCoordinateRegion(region: CoordinateRegion) : mapkit.CoordinateRegion {
+export function toMapKitCoordinateRegion(
+  region: CoordinateRegion
+): mapkit.CoordinateRegion {
   return new mapkit.CoordinateRegion(
     new mapkit.Coordinate(region.centerLatitude, region.centerLongitude),
-    new mapkit.CoordinateSpan(region.latitudeDelta, region.longitudeDelta),
+    new mapkit.CoordinateSpan(region.latitudeDelta, region.longitudeDelta)
   );
 }

@@ -25,7 +25,7 @@ const Map = React.forwardRef<
       token,
 
       colorScheme = ColorScheme.Light,
-      mapType = MapType.Standard,
+      mapType = "standard",
       distances = Distances.Adaptive,
       loadPriority = LoadPriority.LandCover,
 
