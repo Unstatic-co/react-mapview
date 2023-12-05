@@ -18,29 +18,7 @@ export declare function toMapKitColorScheme(colorScheme: ColorScheme): string;
  * Types of map to display.
  * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes}
  */
-export declare enum MapType {
-    /**
-     * A street map that shows the position of all roads and some road names.
-     * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/standard}
-     */
-    Standard = 0,
-    /**
-     * A street map where your data is emphasized over the underlying map details.
-     * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/mutedstandard}
-     */
-    MutedStandard = 1,
-    /**
-     * A satellite image of the area with road and road name information
-     * layered on top.
-     * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/hybrid}
-     */
-    Hybrid = 2,
-    /**
-     * A satellite image of the area.
-     * @see {@link https://developer.apple.com/documentation/mapkitjs/map/maptypes/satellite}
-     */
-    Satellite = 3
-}
+export type MapType = "standard" | "satellite" | "hybrid" | "mutedStandard";
 /**
  * Converts a mapkit-react map type value to a MapKit JS map type value.
  * Must be called after MapKit JS is loaded.
