@@ -8,3 +8,4 @@ export {
 	ColorScheme, MapType, Distances, LoadPriority, FeatureVisibility,
 } from './util/parameters';
 export type { CoordinateRegion } from './util/parameters';
+export {default as MapContext} from "./context/MapContext";
