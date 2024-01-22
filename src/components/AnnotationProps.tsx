@@ -46,4 +46,9 @@ export default interface AnnotationProps {
    * React children to render inside the annotation.
    */
   children?: React.ReactNode;
+
+  /**
+   * Element to render inside the annotation's callout.
+   */
+  callout?: React.ReactNode;
 }

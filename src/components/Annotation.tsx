@@ -1,28 +1,27 @@
-import {
-  useContext,
-  useEffect,
-  useState,
-  useMemo,
-} from 'react';
-import { createPortal } from 'react-dom';
-import MapContext from '../context/MapContext';
-import AnnotationProps from './AnnotationProps';
+import React, { useContext, useEffect, useState, useMemo } from "react";
+import { createPortal } from "react-dom";
+import MapContext from "../context/MapContext";
+import AnnotationProps from "./AnnotationProps";
 
 export default function Annotation({
   latitude,
   longitude,
 
-  title = '',
-  subtitle = '',
+  title = "",
+  subtitle = "",
   accessibilityLabel = null,
 
   selected = undefined,
   onSelect = undefined,
   onDeselect = undefined,
+  callout,
   children,
 }: AnnotationProps) {
   const [annotation, setAnnotation] = useState<mapkit.Annotation | null>(null);
-  const contentEl = useMemo<HTMLDivElement>(() => document.createElement('div'), []);
+  const contentEl = useMemo<HTMLDivElement>(
+    () => document.createElement("div"),
+    []
+  );
   const map = useContext(MapContext);
 
   // Coordinates
@@ -59,8 +58,8 @@ export default function Annotation({
 
   // Events
   const events = [
-    { name: 'select', handler: onSelect },
-    { name: 'deselect', handler: onDeselect },
+    { name: "select", handler: onSelect },
+    { name: "deselect", handler: onDeselect },
   ] as const;
   events.forEach(({ name, handler }) => {
     useEffect(() => {
@@ -69,9 +68,34 @@ export default function Annotation({
       const handlerWithoutParameters = () => handler();
 
       annotation.addEventListener(name, handlerWithoutParameters);
-      return () => annotation.removeEventListener(name, handlerWithoutParameters);
+      return () =>
+        annotation.removeEventListener(name, handlerWithoutParameters);
     }, [annotation, handler]);
   });
 
-  return createPortal(children, contentEl);
+  // Handle render custom callout
+  const calloutEl = useMemo<HTMLDivElement>(
+    () => document.createElement("div"),
+    []
+  );
+  const hasCustomCallout = !!callout;
+
+  useEffect(() => {
+    if (!annotation) {
+      return;
+    }
+
+    annotation.callout = hasCustomCallout ? {
+      calloutElementForAnnotation() {
+        return calloutEl;
+      },
+    } : {};
+  }, [hasCustomCallout, annotation]);
+
+  return (
+    <>
+      {hasCustomCallout ? createPortal(callout, calloutEl) : null}
+      {createPortal(children, contentEl)}
+    </>
+  );
 }
