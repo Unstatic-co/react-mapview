@@ -51,8 +51,10 @@ export default function Annotation({
   Object.entries(properties).forEach(([propertyName, prop]) => {
     useEffect(() => {
       if (!annotation) return;
-      // @ts-ignore
-      annotation[propertyName] = prop;
+      setTimeout(() => {
+        // @ts-ignore
+        annotation[propertyName] = prop;
+      }, 500);
     }, [annotation, prop]);
   });
 
