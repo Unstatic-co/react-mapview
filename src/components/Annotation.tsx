@@ -36,7 +36,11 @@ export default function Annotation({
     setAnnotation(a);
 
     return () => {
-      map.removeAnnotation(a);
+      try {
+        map.removeAnnotation(a);
+      } catch (error) {
+        console.error("Failed to remove annotation", error);
+      }
     };
   }, [map, latitude, longitude]);
 

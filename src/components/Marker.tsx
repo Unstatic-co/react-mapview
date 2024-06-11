@@ -38,7 +38,11 @@ export default function Marker({
     setMarker(m);
 
     return () => {
-      map.removeAnnotation(m);
+      try {
+        map.removeAnnotation(m);
+      } catch (error) {
+        console.error("Failed to remove marker", error);
+      }
     };
   }, [map, latitude, longitude]);
 
