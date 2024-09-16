@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
+import React, { useContext, useEffect, useState, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import MapContext from "../context/MapContext";
 import AnnotationProps from "./AnnotationProps";
@@ -32,6 +32,7 @@ export default function Annotation({
       new mapkit.Coordinate(latitude, longitude),
       () => contentEl,
     );
+    
     map.addAnnotation(a);
     setAnnotation(a);
 
@@ -42,7 +43,12 @@ export default function Annotation({
         console.error("Failed to remove annotation", error);
       }
     };
-  }, [map, latitude, longitude]);
+  }, [map]);
+
+  useEffect(() => {
+    if (!annotation) return;
+    annotation.coordinate = new mapkit.Coordinate(latitude, longitude);
+  }, [annotation, latitude, longitude]);
 
   // Simple values properties
   const properties = {
@@ -63,21 +69,29 @@ export default function Annotation({
   });
 
   // Events
-  const events = [
-    { name: "select", handler: onSelect },
-    { name: "deselect", handler: onDeselect },
-  ] as const;
-  events.forEach(({ name, handler }) => {
-    useEffect(() => {
-      if (!annotation || !handler) return undefined;
+  const onSelectRef = useRef(onSelect);
+  const onDeselectRef = useRef(onDeselect);
+  onSelectRef.current = onSelect;
+  onDeselectRef.current = onDeselect;
+  
+  useEffect(() => {
+    if (!annotation) return undefined;
 
-      const handlerWithoutParameters = () => handler();
+    const events = [
+      { name: "select", handler: () => onSelectRef.current?.() },
+      { name: "deselect", handler: () => onDeselectRef.current?.() },
+    ] as const;
+   
+    events.forEach(({ name, handler }) => {
+      annotation.addEventListener(name, handler);
+    })
 
-      annotation.addEventListener(name, handlerWithoutParameters);
-      return () =>
-        annotation.removeEventListener(name, handlerWithoutParameters);
-    }, [annotation, handler]);
-  });
+    return () => {
+      events.forEach(({ name, handler }) => {
+        annotation.removeEventListener(name, handler);
+      })
+    }
+  }, [annotation]);
 
   // Handle render custom callout
   const calloutEl = useMemo<HTMLDivElement>(
